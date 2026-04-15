@@ -4,7 +4,8 @@ A lightweight container runtime in C demonstrating Linux namespaces, kernel memo
 
 ## 1. Team Information
 
-- Vijeth (SRN: [Your SRN])
+- Vijeth (SRN:PES1UG24CS531)
+- Vashist (SRN:PES1UG24CS521)
 
 ## 2. Build, Load, and Run
 
