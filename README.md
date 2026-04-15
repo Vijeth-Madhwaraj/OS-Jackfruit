@@ -46,14 +46,14 @@ sudo rmmod monitor
 
 | # | Requirement | Screenshot |
 |---|---|---|
-| 1 | Multi-container supervision | ![Multi-container supervision](./Pictures/SS1.png) |
-| 2 | Metadata tracking | ![Metadata tracking](./Pictures/SS2.png) |
-| 3 | Bounded-buffer logging | ![Bounded-buffer logging](./Pictures/SS3.png) |
-| 4 | CLI and IPC | ![CLI and IPC](./Pictures/SS4.png) |
-| 5 | Soft-limit warning | ![Soft-limit warning](./Pictures/SS5.png) |
-| 6 | Hard-limit enforcement | ![Hard-limit enforcement](./Pictures/SS6(2).png) |
-| 7 | Scheduling experiment | ![Scheduling experiment](./Pictures/SS7.png) |
-| 8 | Clean teardown | ![Clean teardown](./Pictures/SS8.png) |
+| 1 | Multi-container supervision | ![Multi-container supervision](./pictures/SS1.png) |
+| 2 | Metadata tracking | ![Metadata tracking](./pictures/SS2.png) |
+| 3 | Bounded-buffer logging | ![Bounded-buffer logging](./pictures/SS3.png) |
+| 4 | CLI and IPC | ![CLI and IPC](./pictures/SS4.png)<br>![CLI and IPC (alternate)](./pictures/SS4(2).png) |
+| 5 | Soft-limit warning | ![Soft-limit warning](./pictures/SS5.png) |
+| 6 | Hard-limit enforcement | ![Hard-limit enforcement](./pictures/SS6(2).png) |
+| 7 | Scheduling experiment | ![Scheduling experiment](./pictures/SS7.png)<br>![Scheduling experiment (alternate)](./pictures/SS7(2).png) |
+| 8 | Clean teardown | ![Clean teardown](./pictures/SS8.png)<br>![Clean teardown (alternate)](./pictures/SS8(2).png) |
 
 ---
 
@@ -127,11 +127,11 @@ sudo rmmod monitor
 
 | Subsystem | Design Choice | Tradeoff | Justification |
 |---|---|---|---|
-| **Isolation** | Linux namespaces (not VMs) | ✅ Lightweight, ❌ Not as strong as VMs | Demonstrates core isolation concepts; production systems layer additional isolation (seccomp, AppArmor) on top |
-| **Supervisor** | Long-running parent + reaper thread | ✅ Centralized state, ❌ Single point of failure | Simplicity + correct SIGCHLD handling; production uses systemd or replicated supervisors |
-| **IPC** | Separate pipes (logging) + socket (control) | ✅ Clean separation, ❌ More complexity | Pipes fit producer/consumer; sockets fit RPC; combining would require complex multiplexing |
-| **Buffer** | Bounded ring + condition vars (not polling) | ✅ No CPU wasting, ❌ More complex sync | Standard POSIX pattern; avoids busy-waiting; fixed size prevents unbounded memory |
-| **Monitor** | Periodic timer + spinlock (not async events) | ✅ Simple, ❌ ~1s latency | Demo-level simplicity; production uses cgroup events or memory pressure stalls |
+| **Isolation** | Linux namespaces (not VMs) |  Lightweight,  Not as strong as VMs | Demonstrates core isolation concepts; production systems layer additional isolation (seccomp, AppArmor) on top |
+| **Supervisor** | Long-running parent + reaper thread |  Centralized state,  Single point of failure | Simplicity + correct SIGCHLD handling; production uses systemd or replicated supervisors |
+| **IPC** | Separate pipes (logging) + socket (control) |  Clean separation,  More complexity | Pipes fit producer/consumer; sockets fit RPC; combining would require complex multiplexing |
+| **Buffer** | Bounded ring + condition vars (not polling) | No CPU wasting, More complex sync | Standard POSIX pattern; avoids busy-waiting; fixed size prevents unbounded memory |
+| **Monitor** | Periodic timer + spinlock (not async events) |  Simple,  ~1s latency | Demo-level simplicity; production uses cgroup events or memory pressure stalls |
 
 ---
 
